@@ -11,7 +11,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="profile-regist">
     <h1><?= Html::encode($this->title) ?></h1>
-
+    <br>
+    <p><b>利用方法</b><br>
+        <b>サービス名</b>にはあなたのwebサイトの名前やあなたが使っているwebサービスやSNSの名前(Twitter、Pixiv、ニコニコ動画、Facebook、Linkedin、Youtubeチャンネル名、インスタグラム。PSNフレンドコード、ニンテンドーアカウント)、或いはアプリの名前(デレステ、グラブル、ブルーアーカイブ)などを入れて下さい。<br><br>
+        <b>サービスURL</b>にはサービス名で指定したあなたのwebサイトのURL(https://foovar.com)やwebサービスやSNSのあなたのURL(例 https://x.com/foovar、https://www.pixiv.net/users/******)、アプリのフレンドコード(例 idf123456)などを入力して下さい。<br>
+        URL形式の文字列は自動的にリンクが貼られます
+    </p>
+    <br>
     <div class="profile-form">
 
         <?php $form = ActiveForm::begin(); ?>

@@ -42,10 +42,21 @@ $profileUrl = Yii::$app->urlManager->createAbsoluteUrl(['profile/view', 'id' => 
         </thead>
         <tbody>
         <?php for ($i = 1; $i <= 10; $i++): ?>
-            <?php if (!empty($profile["service{$i}"]) && !empty($profile["service{$i}_url"])): ?>
+            <?php
+            $service = $profile["service{$i}"];
+            $url = $profile["service{$i}_url"];
+            if (!empty($service) && !empty($url)):
+                $isLink = preg_match('/^https?:\/\//', $url);
+                ?>
                 <tr>
-                    <td><?= Html::encode($profile["service{$i}"]) ?></td>
-                    <td><?= Html::encode($profile["service{$i}_url"]) ?></td>
+                    <td><?= Html::encode($service) ?></td>
+                    <td>
+                        <?php if ($isLink): ?>
+                            <?= Html::a(Html::encode($url), $url, ['target' => '_blank']) ?>
+                        <?php else: ?>
+                            <?= Html::encode($url) ?>
+                        <?php endif; ?>
+                    </td>
                 </tr>
             <?php endif; ?>
         <?php endfor; ?>
