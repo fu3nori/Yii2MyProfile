@@ -2,25 +2,31 @@
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'ユーザー情報編集';
+/** @var yii\web\View $this */
+/** @var app\models\User $model */
+
+$this->title = 'ユーザー編集';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-edit">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>以下のフィールドに入力して編集してください:</p>
+    <div class="user-form">
 
-    <?php $form = ActiveForm::begin(['id' => 'edit-form']); ?>
+        <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'mail')->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'mail')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'username')->textInput() ?>
+        <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password')->passwordInput(['value' => '']) ?>
+        <!-- ここでパスワードを平文で表示 -->
+        <?= $form->field($model, 'password')->textInput(['value' => $model->password, 'maxlength' => true]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('更新', ['class' => 'btn btn-primary', 'name' => 'edit-button']) ?>
+        <div class="form-group">
+            <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+
     </div>
-
-    <?php ActiveForm::end(); ?>
 </div>

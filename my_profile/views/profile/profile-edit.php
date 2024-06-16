@@ -1,0 +1,58 @@
+<?php
+
+use yii\helpers\Html;
+use yii\bootstrap5\ActiveForm;
+
+/** @var yii\web\View $this */
+/** @var app\models\ProfileForm $model */
+
+$this->title = 'プロフィール編集';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="profile-edit">
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <div class="profile-form">
+
+        <?php $form = ActiveForm::begin(); ?>
+
+        <?= $form->field($model, 'self_introduction')->textarea(['rows' => 6]) ?>
+
+        <?= $form->field($model, 'service1')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'service1_url')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'service2')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'service2_url')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'service3')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'service3_url')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'service4')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'service4_url')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'service5')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'service5_url')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'service6')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'service6_url')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'service7')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'service7_url')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'service8')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'service8_url')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'service9')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'service9_url')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'service10')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'service10_url')->textInput(['maxlength' => true]) ?>
+
+        <div class="form-group">
+            <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+
+    </div>
+</div>

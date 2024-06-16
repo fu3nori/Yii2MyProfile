@@ -8,19 +8,21 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-regist">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>以下のフィールドに入力して登録してください:</p>
+    <div class="user-form">
 
-    <?php $form = ActiveForm::begin(['id' => 'regist-form']); ?>
+        <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'mail')->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'username')->textInput() ?>
+        <?= $form->field($model, 'mail')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password')->passwordInput() ?>
+        <?= $form->field($model, 'password')->passwordInput() ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('登録', ['class' => 'btn btn-primary', 'name' => 'regist-button']) ?>
+        <div class="form-group">
+            <?= Html::submitButton('登録', ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+
     </div>
-
-    <?php ActiveForm::end(); ?>
 </div>

@@ -4,7 +4,7 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\User;
-use app\models\LoginForm;
+use yii\web\ForbiddenHttpException;
 
 class UserController extends Controller
 {
@@ -14,7 +14,7 @@ class UserController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
+        $model = new \app\models\LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
@@ -48,24 +48,42 @@ class UserController extends Controller
 
     public function actionEdit($id)
     {
+        $currentUserId = Yii::$app->user->id;
+        $currentUserRole = Yii::$app->user->identity->role;
+
+        if ($currentUserRole != 1 && $currentUserId != $id) {
+            throw new ForbiddenHttpException('アクセスが拒否されました');
+        }
+
         $model = User::findOne($id);
+        if (!$model) {
+            throw new \yii\web\NotFoundHttpException('ユーザーが見つかりません');
+        }
+
+        $oldPassword = $model->password;
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if (!empty($model->password)) {
                 $model->setPassword($model->password);
+            } else {
+                $model->password = $oldPassword;
             }
             $model->save(false);
             return $this->redirect(['site/index']);
         }
+
+        $model->password = ''; // パスワードフィールドを空にしておく
 
         return $this->render('user-edit', [
             'model' => $model,
         ]);
     }
 
+
     public function actionList()
     {
         if (Yii::$app->user->isGuest || Yii::$app->user->identity->role != 1) {
-            throw new \yii\web\ForbiddenHttpException('アクセスが拒否されました');
+            throw new ForbiddenHttpException('アクセスが拒否されました');
         }
 
         $users = User::find()->all();
