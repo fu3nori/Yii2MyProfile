@@ -29,6 +29,8 @@ $profileExists = !Yii::$app->user->isGuest && Profile::find()->where(['user_id' 
             <div style="float: left; padding: 5px;">
                 <?= Html::a('アカウント確認・編集', Url::to(['user/edit', 'id' => $userId]), ['class' => 'btn btn-primary btn-lg']) ?>
             </div>
+
+
             <?php if ($profileExists): ?>
                 <div style="float: left; padding: 5px;">
                     <?= Html::a('プロフィールを編集する', Url::to(['profile/edit', 'id' => $userId]), ['class' => 'btn btn-primary btn-lg']) ?>
