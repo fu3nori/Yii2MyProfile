@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /** @var yii\web\View $this */
 /** @var app\models\Profile $profile */
+/** @var app\models\User $user */
 
 $this->title = 'プロフィール';
 $this->params['breadcrumbs'][] = $this->title;
@@ -27,7 +28,7 @@ $profileUrl = Yii::$app->urlManager->createAbsoluteUrl(['profile/view', 'id' => 
     </div>
 
     <h2>ユーザー名</h2>
-    <p><?= Html::encode(Yii::$app->user->identity->username) ?></p>
+    <p><?= Html::encode($user->username) ?></p>
 
     <h2>自己紹介文</h2>
     <p><?= nl2br(Html::encode($profile->self_introduction)) ?></p>

@@ -7,6 +7,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use app\models\Profile;
+use app\models\User;
 use app\models\ProfileForm;
 
 class ProfileController extends Controller
@@ -82,11 +83,20 @@ class ProfileController extends Controller
     public function actionView($id)
     {
         $profile = Profile::findOne(['user_id' => $id]);
-
-        if (!$profile) {
-            throw new NotFoundHttpException('プロフィールが見つかりません');
+        if ($profile === null) {
+            throw new NotFoundHttpException("Profile not found.");
         }
 
-        return $this->render('profile-view', ['profile' => $profile]);
+        $user = User::findOne($id);
+        if ($user === null) {
+            throw new NotFoundHttpException("User not found.");
+        }
+
+        return $this->render('profile-view', [
+            'profile' => $profile,
+            'user' => $user,
+        ]);
     }
+
+
 }
