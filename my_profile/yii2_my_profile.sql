@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2024 at 03:30 PM
+-- Generation Time: Jun 18, 2024 at 07:39 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -68,7 +68,7 @@ CREATE TABLE `user` (
   `auth_key` varchar(32) NOT NULL,
   `ip` varchar(255) DEFAULT NULL COMMENT 'IPアドレス',
   `created` datetime NOT NULL DEFAULT current_timestamp() COMMENT '登録日',
-  `token` varchar(32) DEFAULT NULL COMMENT 'パスワードリセットトークン'
+  `token` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='ユーザー情報テーブル';
 
 --
