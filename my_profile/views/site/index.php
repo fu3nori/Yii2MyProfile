@@ -48,6 +48,9 @@ $profileExists = !Yii::$app->user->isGuest && Profile::find()->where(['user_id' 
                     <?= Html::a('管理画面を表示', Url::to(['admin/index']), ['class' => 'btn btn-danger btn-lg']) ?>
                 </div>
             <?php endif; ?>
+            <div style="float: left; padding: 5px;">
+                <?= Html::a('退会する', Url::to(['withdrawal/index', 'id' => $userId]), ['class' => 'btn btn-danger btn-lg']) ?>
+            </div>
         <?php endif; ?>
         <div style="clear: both;"></div>
     </div>
