@@ -9,7 +9,7 @@ use yii\web\ForbiddenHttpException;
 use app\models\Profile;
 use app\models\User;
 use app\models\ProfileForm;
-
+use Endroid\QrCode\Builder\Builder;
 class ProfileController extends Controller
 {
     public function behaviors()
@@ -92,9 +92,20 @@ class ProfileController extends Controller
             throw new NotFoundHttpException("User not found.");
         }
 
+        // QRコード生成
+        $profileUrl = Yii::$app->urlManager->createAbsoluteUrl(['profile/view', 'id' => $profile->user_id]);
+        $result = Builder::create()
+            ->data($profileUrl)
+            ->size(200)
+            ->margin(10)
+            ->build();
+
+        $qrCode = base64_encode($result->getString());
+
         return $this->render('profile-view', [
             'profile' => $profile,
             'user' => $user,
+            'qrCode' => $qrCode, // QRコードをビューに渡す
         ]);
     }
 

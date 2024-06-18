@@ -6,7 +6,7 @@ use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use app\models\User;
 use yii\base\DynamicModel;
-
+use Endroid\QrCode\Builder\Builder;
 class UserController extends Controller
 {
     public function actionLogin()

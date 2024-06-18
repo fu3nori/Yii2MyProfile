@@ -5,6 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Profile $profile */
 /** @var app\models\User $user */
+/** @var string $qrCode */
 
 $this->title = 'プロフィール';
 $this->params['breadcrumbs'][] = $this->title;
@@ -14,6 +15,10 @@ $profileUrl = Yii::$app->urlManager->createAbsoluteUrl(['profile/view', 'id' => 
 
 <div class="profile-view">
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <div style="float: right;">
+        <img src="data:image/png;base64, <?= $qrCode ?>" alt="QR Code">
+    </div>
 
     <div>
         <p>URL: <?= Html::a($profileUrl, $profileUrl) ?></p>
