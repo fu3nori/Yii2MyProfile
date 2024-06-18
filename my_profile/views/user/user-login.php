@@ -23,4 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <?php ActiveForm::end(); ?>
+    <br>
+    <p><a href="../user/forget">パスワードを忘れた方はこちら</a></p>
 </div>
