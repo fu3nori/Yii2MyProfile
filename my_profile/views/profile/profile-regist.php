@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
     <div class="profile-form">
 
-        <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
         <?= $form->field($model, 'self_introduction')->textarea(['rows' => 6]) ?>
 
@@ -53,9 +53,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'service10')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'service10_url')->textInput(['maxlength' => true]) ?>
+        <!-- ファイルアップロード -->
+        <?php if (Yii::$app->user->identity->role == 3): ?>
+            <?= $form->field($model, 'img_url1')->fileInput() ?>
+            <?= $form->field($model, 'img_url2')->fileInput() ?>
+            <?= $form->field($model, 'img_url3')->fileInput() ?>
+            <?= $form->field($model, 'img_url4')->fileInput() ?>
+            <?= $form->field($model, 'img_url5')->fileInput() ?>
+        <?php endif; ?>
 
+        <!-- ここまで-->
         <div class="form-group">
-            <?= Html::submitButton('登録', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('登録', ['class' => 'btn btn-primary']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
