@@ -39,7 +39,6 @@ class ProfileController extends Controller
     {
         $userId = Yii::$app->user->id;
 
-        // Check if the profile already exists
         if (Profile::find()->where(['user_id' => $userId])->exists()) {
             throw new ForbiddenHttpException('プロフィールは既に登録されています。');
         }
@@ -113,6 +112,25 @@ class ProfileController extends Controller
                 $this->deleteOldImage($profile->$thumbnailAttribute);
 
                 // 新しい画像の保存
+                $imgPath = $this->saveImage($uploadedFile);
+                $profile->$imgAttribute = $imgPath['full'];
+                $profile->$thumbnailAttribute = $imgPath['thumbnail'];
+            }
+        }
+    }
+
+    protected function handleFileUpload($model, $profile)
+    {
+        for ($i = 1; $i <= 5; $i++) {
+            $imgAttribute = "img_url{$i}";
+            $thumbnailAttribute = "thum_url{$i}";
+            $uploadedFile = UploadedFile::getInstance($model, $imgAttribute);
+
+            if ($uploadedFile) {
+                // 古い画像の削除
+                $this->deleteOldImage($profile->$imgAttribute);
+                $this->deleteOldImage($profile->$thumbnailAttribute);
+
                 $imgPath = $this->saveImage($uploadedFile);
                 $profile->$imgAttribute = $imgPath['full'];
                 $profile->$thumbnailAttribute = $imgPath['thumbnail'];
