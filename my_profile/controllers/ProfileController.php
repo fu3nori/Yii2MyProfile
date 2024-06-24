@@ -176,12 +176,14 @@ class ProfileController extends Controller
 
     public function actionView($id)
     {
-        $profile = Profile::findOne(['user_id' => $id]);
+        $reference = (int)Yii::$app->request->get('id');
+        $profile = Profile::findOne(['user_id' => $reference]);
+
         if ($profile === null) {
             throw new NotFoundHttpException("Profile not found.");
         }
 
-        $user = User::findOne($id);
+        $user = User::findOne($reference);
         if ($user === null) {
             throw new NotFoundHttpException("User not found.");
         }

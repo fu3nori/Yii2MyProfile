@@ -5,20 +5,16 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Profile $profile */
 /** @var app\models\User $user */
-/** @var string $qrCode */
 
 $this->title = 'プロフィール';
 $this->params['breadcrumbs'][] = $this->title;
 
 $profileUrl = Yii::$app->urlManager->createAbsoluteUrl(['profile/view', 'id' => $profile->user_id]);
+$domain = Yii::$app->request->hostInfo; // ドメイン名を取得
 ?>
 
 <div class="profile-view">
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <div style="float: right;">
-        <img src="data:image/png;base64, <?= $qrCode ?>" alt="QR Code">
-    </div>
 
     <div>
         <p>URL: <?= Html::a($profileUrl, $profileUrl) ?></p>
@@ -34,6 +30,21 @@ $profileUrl = Yii::$app->urlManager->createAbsoluteUrl(['profile/view', 'id' => 
 
     <h2>ユーザー名</h2>
     <p><?= Html::encode($user->username) ?></p>
+
+    <?php if ($profile->thum_url1 || $profile->thum_url2 || $profile->thum_url3 || $profile->thum_url4 || $profile->thum_url5): ?>
+        <h2>ポートフォリオ・画像</h2>
+        <div style="float: left;">
+            <?php for ($i = 1; $i <= 5; $i++): ?>
+                <?php $thumbnail = $profile->{"thum_url{$i}"}; ?>
+                <?php if ($thumbnail): ?>
+                    <div style="float: left; margin: 10px;">
+                        <img src="<?= $domain . $thumbnail ?>" alt="Thumbnail <?= $i ?>">
+                    </div>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
+        <div style="clear: both;"></div>
+    <?php endif; ?>
 
     <h2>自己紹介文</h2>
     <p><?= nl2br(Html::encode($profile->self_introduction)) ?></p>
