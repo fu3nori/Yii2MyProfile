@@ -35,10 +35,15 @@ $domain = Yii::$app->request->hostInfo; // ドメイン名を取得
         <h2>ポートフォリオ・画像</h2>
         <div style="float: left;">
             <?php for ($i = 1; $i <= 5; $i++): ?>
-                <?php $thumbnail = $profile->{"thum_url{$i}"}; ?>
-                <?php if ($thumbnail): ?>
+                <?php
+                $thumbnail = $profile->{"thum_url{$i}"};
+                $original = $profile->{"img_url{$i}"};
+                ?>
+                <?php if ($thumbnail && $original): ?>
                     <div style="float: left; margin: 10px;">
-                        <img src="<?= $domain . $thumbnail ?>" alt="Thumbnail <?= $i ?>">
+                        <a href="<?= $domain . $original ?>" target="_blank">
+                            <img src="<?= $domain . $thumbnail ?>" alt="Thumbnail <?= $i ?>">
+                        </a>
                     </div>
                 <?php endif; ?>
             <?php endfor; ?>
