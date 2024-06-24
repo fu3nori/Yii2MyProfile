@@ -151,7 +151,7 @@ class ProfileController extends Controller
         if ($uploadedFile->saveAs($fullPath)) {
             // サムネイルの生成
             $image = \yii\imagine\Image::getImagine()->open($fullPath);
-            $thumbnail = $image->thumbnail(new Box(300, 300));
+            $thumbnail = $image->thumbnail(new Box(200, 200));
             $thumbnailPath = $basePath . $thumbnailFilename;
             $thumbnail->save($thumbnailPath, ['quality' => 80]);
 
