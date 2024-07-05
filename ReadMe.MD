@@ -35,7 +35,7 @@ https://qiita.com/Fu3nori/items/0d602634ae0592581ce6
 ## googleソーシャルログイン認証設定
 ソーシャルログインの設定手順  
 googleアカウントを作る  
-google cloudコンソール　https://console.cloud.google.com/welcome　
+google cloudコンソール　https://console.cloud.google.com/welcome  　
 にアクセス    
 左側のハンバーガーメニューからIAMを選択  
 ドロップダウンリストをクリックし新しいプロジェクトを選択  
