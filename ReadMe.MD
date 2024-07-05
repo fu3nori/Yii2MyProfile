@@ -52,13 +52,18 @@ Externalを選択して作成
 と入力　
 ※httpdのURL設定で～/webをウェブルートディレクトリにしていたのならhttps://www.ドメイン名/アプリ設置ディレクトリ/  
 で良い  
-デモアプリのホームページ（トップページ）はhttps://my-profile.biz/web/　なのでそのとおりにいれる。  
+デモアプリのホームページ（トップページ）はhttps://my-profile.biz/web/　
+なのでそのとおりにいれる。  
 アプリケーション・プライバシーポリシーリンクは、Aboutページにプライバシーポリシーを記入するので  
-https://ドメイン名/設置ディレクトリ/web/site/aboutとする。  
-デモアプリの場合はhttps://my-profile.biz/web/site/about　となる  
+https://ドメイン名/設置ディレクトリ/web/site/about   
+とする。  
+デモアプリの場合はhttps://my-profile.biz/web/site/about　
+となる    
 アプリケーション利用規約リンクはAboutページに利用規約を記入するので  
-https://ドメイン名/設置ディレクトリ/web/site/aboutとする。  
-デモアプリの場合はhttps://my-profile.biz/web/site/about　となる  
+https://ドメイン名/設置ディレクトリ/web/site/about  
+とする。  
+デモアプリの場合はhttps://my-profile.biz/web/site/about　
+となる  
 承認済みドメインにはドメインの追加を押してアプリを設置するサーバーのドメイン ex foovar.comなどをいれる  
 デモアプリのドメインはmy-profile.bizなのでその通りにいれる  
 デベロッパーの連絡先情報には今回取得したgoogleアカウントのメールアドレスを入れる。  
