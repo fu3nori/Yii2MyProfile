@@ -87,7 +87,6 @@ $domain = Yii::$app->request->hostInfo; // ドメイン名を取得
                 <tr>
                     <th>サービス名</th>
                     <th>サービスURL・コード</th>
-                    <th>アクション</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -99,17 +98,28 @@ $domain = Yii::$app->request->hostInfo; // ドメイン名を取得
                         $isLink = preg_match('/^https?:\/\//', $url);
                         $displayUrl = (strlen($url) > 30) ? substr($url, 0, 29) . '...' : $url;
                         ?>
-                        <tr>
+                        <tr class="d-none d-md-table-row">
                             <td><?= Html::encode($service) ?></td>
                             <td>
                                 <?php if ($isLink): ?>
-                                    <?= Html::a(Html::encode($displayUrl), $url, ['target' => '_blank', 'title' => Html::encode($url)]) ?>
+                                    <?= Html::a(Html::encode($displayUrl), $url, ['target' => '_blank', 'title' => Html::encode($url)]) ?><br>
+                                    <?= Html::button('クリップボードにコピー', ['class' => 'btn btn-secondary btn-sm mt-1', 'onclick' => 'copyToClipboard("'.$url.'")']) ?>
                                 <?php else: ?>
-                                    <?= Html::encode($displayUrl) ?>
+                                    <?= Html::encode($displayUrl) ?><br>
+                                    <?= Html::button('クリップボードにコピー', ['class' => 'btn btn-secondary btn-sm mt-1', 'onclick' => 'copyToClipboard("'.$url.'")']) ?>
                                 <?php endif; ?>
                             </td>
-                            <td>
-                                <?= Html::button('クリップボードにコピー', ['class' => 'btn btn-secondary btn-sm', 'onclick' => 'copyToClipboard("'.$url.'")']) ?>
+                        </tr>
+                        <tr class="d-md-none">
+                            <td colspan="2">
+                                <strong><?= Html::encode($service) ?></strong><br>
+                                <?php if ($isLink): ?>
+                                    <?= Html::a(Html::encode($displayUrl), $url, ['target' => '_blank', 'title' => Html::encode($url)]) ?><br>
+                                    <?= Html::button('クリップボードにコピー', ['class' => 'btn btn-secondary btn-sm mt-1', 'onclick' => 'copyToClipboard("'.$url.'")']) ?>
+                                <?php else: ?>
+                                    <?= Html::encode($displayUrl) ?><br>
+                                    <?= Html::button('クリップボードにコピー', ['class' => 'btn btn-secondary btn-sm mt-1', 'onclick' => 'copyToClipboard("'.$url.'")']) ?>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endif; ?>
@@ -154,5 +164,15 @@ $domain = Yii::$app->request->hostInfo; // ドメイン名を取得
     .twitter-share:hover {
         background-color: #0d8ddb;
         color: white;
+    }
+    @media (max-width: 767.98px) {
+        .d-md-table-row {
+            display: none;
+        }
+    }
+    @media (min-width: 768px) {
+        .d-md-none {
+            display: none;
+        }
     }
 </style>
