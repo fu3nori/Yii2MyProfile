@@ -35,7 +35,8 @@ https://qiita.com/Fu3nori/items/0d602634ae0592581ce6
 ## googleソーシャルログイン認証設定
 ソーシャルログインの設定手順  
 googleアカウントを作る  
-google cloudコンソール　https://console.cloud.google.com/welcome　にアクセス  
+google cloudコンソール　https://console.cloud.google.com/welcome　
+にアクセス    
 左側のハンバーガーメニューからIAMを選択  
 ドロップダウンリストをクリックし新しいプロジェクトを選択  
 プロジェクト名を入力して作成、ここではMyProfileRelease  
@@ -47,8 +48,10 @@ Externalを選択して作成
 アプリ名にMyProfileReleaseと入力  
 ユーザーサポートメールのドロップダウンリストでIAMで登録したメールアドレスを選択  
 アプリのロゴに120px*120px以内のサイズの画像ファイルをアップロード  
-アプリのドメインでアプリケーションのホームページにはhttps://www.ドメイン名/アプリ設置ディレクトリ/webと入力　
-※httpdのURL設定で～/webをウェブルートディレクトリにしていたのならhttps://www.ドメイン名/アプリ設置ディレクトリ/で良い  
+アプリのドメインでアプリケーションのホームページにはhttps://www.ドメイン名/アプリ設置ディレクトリ/web  
+と入力　
+※httpdのURL設定で～/webをウェブルートディレクトリにしていたのならhttps://www.ドメイン名/アプリ設置ディレクトリ/  
+で良い  
 デモアプリのホームページ（トップページ）はhttps://my-profile.biz/web/　なのでそのとおりにいれる。  
 アプリケーション・プライバシーポリシーリンクは、Aboutページにプライバシーポリシーを記入するので  
 https://ドメイン名/設置ディレクトリ/web/site/aboutとする。  
@@ -83,14 +86,17 @@ https://www.アプリを設置したサーバーのドメイン:443　と入力�
 ソーシャル・ログインした後、認証処理を行うURLをポート番号込みで入力する  
 URLはhttps://アプリを設置したサーバーのドメイン:443/アプリを設置したディレクトリ/web/user/auth  
 となる  
-デモアプリの場合https://my-profile.biz/web/user/authが認証処理を行うURLなので  
-https://my-profile.biz:443/web/user/auth となる/  
+デモアプリの場合  
+https://my-profile.biz/web/user/auth  
+が認証処理を行うURLなので  
+https://my-profile.biz:443/web/user/auth 
+となる  
 最後に作成をクリック  
 クライアントIDとクライアントシークレットが表示されるのでメモを取る。
 アプリの　config/web.phpを開く  
 ```config/web.php
 
-		'authClientCollection' => [
+	'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
             'clients' => [
                 'google' => [
@@ -122,7 +128,8 @@ create appをクリックします。
 App nameとClient IDとSecret key 1が表示されるのでメモします。  
 画面下のAccept paymentsで全てのチェックボックスにチェックを入れます  
 Save Changesをクリックします。  
-https://developer.paypal.com/dashboard/applications/live　に移動します。  
+https://developer.paypal.com/dashboard/applications/live  　
+に移動します。  
 App name欄に先ほど入力したアプリ名があるのを確認してクリックします。  
 画面の一番下にAdd Webhookボタン(決済情報を受信するURLの設定)があるので  
 クリックします。  
@@ -156,14 +163,16 @@ views/site/index.phpを開きます。
   
   
 # 管理者アカウント発行
-次に "https://www.インストールしたサーバーのドメイン/インストールディレクトリ/web/user/regist" にアクセスし、アカウントを登録して下さい。    
+次に "https://www.インストールしたサーバーのドメイン/インストールディレクトリ/web/user/regist" 
+にアクセスし、アカウントを登録して下さい。    
 ※この時一番最初に登録したユーザーが管理人となり、userテーブルのroleの値が1=管理人となります。   
 アカウント名とメールアドレスはよく考えて下さい。それ以降に発行されたユーザーアカウントは一般ユーザーでroleは0になります。  
 ※URLに/web/が入るのが嫌な方はwebサーバーのエイリアスなどで対応して下さい。  
    
 ※コンタクトフォームのメール送信機能について  
 このアプリケーションはYii2フレームワークで作られておりデフォルトでコンタクトフォームが用意されていますが受信する管理人のメールアドレスとそのメールアドレスにメールを飛ばすメールサーバーの設定が必要です。    
-https://qiita.com/Fu3nori/items/0d602634ae0592581ce6 のコンタクトフォームの設定 の項目をご覧下さい。  　　
+https://qiita.com/Fu3nori/items/0d602634ae0592581ce6 
+のコンタクトフォームの設定 の項目をご覧下さい。  　　
   
   
 # 出来ること
