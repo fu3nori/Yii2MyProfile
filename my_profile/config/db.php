@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2_my_profile',
-    'username' => 'root',
-    'password' => '',
+    'dsn' => 'mysql:host=localhostまたはDBのホスト名;dbname=作成したDB名',
+    'username' => 'DBのユーザー名',
+    'password' => 'DBのユーザーパスワード',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

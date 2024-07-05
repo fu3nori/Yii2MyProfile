@@ -29,6 +29,20 @@ class ProfileForm extends Model
     public $service10;
     public $service10_url;
 
+    /**
+     * 画像
+     */
+    public $tempName;
+    public $img_url1;
+    public $img_url2;
+    public $img_url3;
+    public $img_url4;
+    public $img_url5;
+    public $thum_url1;
+    public $thum_url2;
+    public $thum_url3;
+    public $thum_url4;
+    public $thum_url5;
     public function rules()
     {
         return [
@@ -36,6 +50,8 @@ class ProfileForm extends Model
             [['service1', 'service2', 'service3', 'service4', 'service5', 'service6', 'service7', 'service8', 'service9', 'service10'], 'string', 'max' => 255],
             [['service1_url', 'service2_url', 'service3_url', 'service4_url', 'service5_url', 'service6_url', 'service7_url', 'service8_url', 'service9_url', 'service10_url'], 'string', 'max' => 255],
             ['service1', 'validateServicePair', 'skipOnEmpty' => false],
+            [['img_url1', 'img_url2', 'img_url3', 'img_url4', 'img_url5'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, gif'],
+            [['thum_url1', 'thum_url2', 'thum_url3', 'thum_url4', 'thum_url5'], 'safe'],
         ];
     }
 
@@ -55,25 +71,25 @@ class ProfileForm extends Model
         return [
             'self_introduction' => '自己紹介文',
             'service1' => 'サービス名1',
-            'service1_url' => 'サービスURL1',
+            'service1_url' => 'サービスURL・コード1',
             'service2' => 'サービス名2',
-            'service2_url' => 'サービスURL2',
+            'service2_url' => 'サービスURL・コード2',
             'service3' => 'サービス名3',
-            'service3_url' => 'サービスURL3',
+            'service3_url' => 'サービスURL・コード3',
             'service4' => 'サービス名4',
-            'service4_url' => 'サービスURL4',
+            'service4_url' => 'サービスURL・コード4',
             'service5' => 'サービス名5',
-            'service5_url' => 'サービスURL5',
+            'service5_url' => 'サービスURL・コード5',
             'service6' => 'サービス名6',
-            'service6_url' => 'サービスURL6',
+            'service6_url' => 'サービスURL・コード6',
             'service7' => 'サービス名7',
-            'service7_url' => 'サービスURL7',
+            'service7_url' => 'サービスURL・コード7',
             'service8' => 'サービス名8',
-            'service8_url' => 'サービスURL8',
+            'service8_url' => 'サービスURL・コード8',
             'service9' => 'サービス名9',
-            'service9_url' => 'サービスURL9',
+            'service9_url' => 'サービスURL・コード9',
             'service10' => 'サービス名10',
-            'service10_url' => 'サービスURL10',
+            'service10_url' => 'サービスURL・コード10',
         ];
     }
 }

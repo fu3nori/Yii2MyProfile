@@ -6,9 +6,85 @@ use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use app\models\User;
 use yii\base\DynamicModel;
+use yii\authclient\ClientInterface;
+use yii\web\NotFoundHttpException;
 use Endroid\QrCode\Builder\Builder;
+use yii\authclient\AuthAction;
+use yii\authclient\clients\Google;
+use app\models\Profile;
+use app\models\ProfileForm;
 class UserController extends Controller
 {
+
+    public function actionHoge()
+    {
+        echo "ぬるぽ";
+    }
+
+
+    public function actionAuth()
+    {
+        $client = Yii::$app->authClientCollection->getClient('google');
+
+        if ($code = Yii::$app->request->get('code')) {
+            $client->fetchAccessToken($code);
+
+            $attributes = $client->getUserAttributes();
+            $email = $attributes['email'];
+            $name = $attributes['name'];
+
+            // 既存のユーザーを確認
+            $user = User::find()->where(['mail' => $email])->one();
+
+            if ($user === null) {
+                // ユーザーが存在しない場合、新規ユーザーを作成
+                $user = new User();
+                $user->mail = $email;
+                $user->username = $name;
+                $user->password = Yii::$app->security->generateRandomString();
+                $user->auth_key = Yii::$app->security->generateRandomString();
+                if (!$user->save()) {
+                    // 保存に失敗した場合のエラーハンドリング
+                    Yii::$app->session->setFlash('error', 'Failed to save user information.');
+                    return $this->goHome();
+                }
+            }
+
+            // ユーザーをログイン
+            Yii::$app->user->login($user, 3600 * 24 * 30);
+
+            return $this->goHome();
+        } else {
+            return $this->redirect($client->buildAuthUrl());
+        }
+    }
+    public function onAuthSuccess($client)
+    {
+        $attributes = $client->getUserAttributes();
+
+        // ユーザー情報を取得
+        $email = $attributes['email'];
+        $name = $attributes['name'];
+
+        // 既存のユーザーを確認
+        $user = User::find()->where(['email' => $email])->one();
+        if (!$user) {
+            // 新しいユーザーを作成
+            $user = new User();
+            $user->username = $name;
+            $user->email = $email;
+            // パスワードは不要、代わりにauth_keyを使用
+            $user->auth_key = Yii::$app->security->generateRandomString();
+            $user->save(false);
+        }
+
+        // ユーザーをログインさせる
+        Yii::$app->user->login($user);
+
+        // ログイン後のリダイレクト先
+        $this->redirect(['site/index']);
+    }
+
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {

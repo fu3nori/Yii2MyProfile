@@ -12,6 +12,18 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'clients' => [
+                'google' => [
+                    'class' => 'yii\authclient\clients\Google',
+                    'clientId' => 'あなたの発行したgoogle認証情報のclientId',
+                    'clientSecret' => 'あなたの発行したgoogle認証情報のclientSecret',
+                    'returnUrl' => 'https://アプリを設置したサーバーのドメイン:443/web/user/auth',
+                    'scope' => 'email profile',
+                ],
+            ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'JgBSUj9ijTEfivdzoFUrMiSgXMQvwVh1',
@@ -29,8 +41,16 @@ $config = [
         'mailer' => [
             'class' => \yii\symfonymailer\Mailer::class,
             'viewPath' => '@app/mail',
-            // send all mails to a file by default.
             'useFileTransport' => false,
+            'transport' => [
+                'dsn' => 'smtp://あなたの発行したgmailアドレス:あなたの発行したgamilのアプリパスワード',
+            ],
+        ],
+        'paypal' => [
+            'class' => 'app\components\PaypalComponent',
+            'clientId' => 'あなたのpaypalビジネスアカウントで発行されたclientId',
+            'clientSecret' => 'あなたのpaypalビジネスアカウントで発行されたclientSecret',
+            'sandbox' => false, // 本番環境ではfalseに設定
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -47,6 +67,8 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+               
+                // 他のルール
             ],
         ],
 

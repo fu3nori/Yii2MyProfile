@@ -13,14 +13,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <br>
     <p><b>利用方法</b><br>
-        <b>サービス名</b>にはあなたのwebサイトの名前やあなたが使っているwebサービスやSNSの名前(Twitter、Pixiv、ニコニコ動画、Facebook、Linkedin、Youtubeチャンネル名、インスタグラム。PSNフレンドコード、ニンテンドーアカウント)、或いはアプリの名前(デレステ、グラブル、ブルーアーカイブ)などを入れて下さい。<br><br>
-        <b>サービスURL</b>にはサービス名で指定したあなたのwebサイトのURL(https://foovar.com)やwebサービスやSNSのあなたのURL(例 https://x.com/foovar、https://www.pixiv.net/users/******)、アプリのフレンドコード(例 idf123456)などを入力して下さい。<br>
+        <b>サービス名</b>にはあなたのwebサイトの名前やあなたが使っているwebサービスやSNSの名前(Twitter、Pixiv、ニコニコ動画、Facebook、Linkedin、Youtubeチャンネル名、インスタグラム。PSNフレンドコード、ニンテンドーアカウント)、或いはアプリの名前などを入れて下さい。<br><br>
+        <b>サービスURL・コード</b>にはサービス名で指定したあなたのwebサイトのURL(https://foovar.com)やwebサービスやSNSのあなたのURL(例 https://x.com/foovar、https://www.pixiv.net/users/******)、アプリのフレンドコード(例 idf123456)などを入力して下さい。<br>
         URL形式の文字列は自動的にリンクが貼られます
     </p>
     <br>
     <div class="profile-form">
 
-        <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
         <?= $form->field($model, 'self_introduction')->textarea(['rows' => 6]) ?>
 
@@ -53,9 +53,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'service10')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'service10_url')->textInput(['maxlength' => true]) ?>
+        <!-- ファイルアップロード -->
 
+        <?php if (Yii::$app->user->identity->role == 3): ?>
+
+            <?= $form->field($model, 'img_url1')->fileInput() ?>
+            <?= $form->field($model, 'img_url2')->fileInput() ?>
+            <?= $form->field($model, 'img_url3')->fileInput() ?>
+            <?= $form->field($model, 'img_url4')->fileInput() ?>
+            <?= $form->field($model, 'img_url5')->fileInput() ?>
+        <?php endif; ?>
+
+        <!-- ここまで-->
         <div class="form-group">
-            <?= Html::submitButton('登録', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('登録', ['class' => 'btn btn-primary']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
