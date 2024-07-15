@@ -13,6 +13,8 @@ use yii\authclient\AuthAction;
 use yii\authclient\clients\Google;
 use app\models\Profile;
 use app\models\ProfileForm;
+use Abraham\TwitterOAuth\TwitterOAuth;
+use yii\helpers\Url;
 class UserController extends Controller
 {
 
@@ -257,4 +259,105 @@ class UserController extends Controller
             'token' => $token,
         ]);
     }
+
+    // Twitter ソーシャルログインのアクション
+    public function actionTwitter()
+    {
+        $request = Yii::$app->request;
+        $oauthToken = $request->get('oauth_token');
+        $oauthVerifier = $request->get('oauth_verifier');
+
+        // デバッグ情報のログ出力
+        Yii::error('OAuth Token: ' . $oauthToken, 'twitter');
+        Yii::error('OAuth Verifier: ' . $oauthVerifier, 'twitter');
+
+        if (!$oauthToken || !$oauthVerifier) {
+            Yii::$app->session->setFlash('error', 'Invalid OAuth response.');
+            return $this->goHome();
+        }
+
+        $session = Yii::$app->session;
+        $oauthTokenSecret = $session->get('oauth_token_secret');
+
+        // デバッグ情報のログ出力
+        Yii::error('OAuth Token Secret: ' . $oauthTokenSecret, 'twitter');
+
+        if (!$oauthTokenSecret) {
+            Yii::$app->session->setFlash('error', 'Invalid session state.');
+            return $this->goHome();
+        }
+
+        try {
+            $twitterOAuth = new TwitterOAuth(
+                Yii::$app->params['twitterConsumerKey'],
+                Yii::$app->params['twitterConsumerSecret'],
+                $oauthToken,
+                $oauthTokenSecret
+            );
+
+            // アクセストークンを取得
+            $accessToken = $twitterOAuth->oauth('oauth/access_token', [
+                'oauth_verifier' => $oauthVerifier
+            ]);
+
+            // デバッグ情報のログ出力
+            Yii::error('Access Token: ' . print_r($accessToken, true), 'twitter');
+
+            // アクセストークンを使ってユーザー情報を取得
+            $twitterUser = $twitterOAuth->get('account/verify_credentials', [
+                'include_email' => 'true',
+                'skip_status' => 'true',
+                'include_entities' => 'false'
+            ]);
+
+            // デバッグ情報のログ出力
+            Yii::error('Twitter User Response: ' . print_r($twitterUser, true), 'twitter');
+
+            if (isset($twitterUser->errors)) {
+                Yii::$app->session->setFlash('error', 'Twitter login failed. Please try again.');
+                return $this->goHome();
+            }
+
+            $email = isset($twitterUser->email) ? $twitterUser->email : null;
+            if (!$email) {
+                Yii::error('Twitter user email not found.', 'twitter');
+                Yii::$app->session->setFlash('error', 'Twitter login failed. Please try again.');
+                return $this->goHome();
+            }
+
+            $name = isset($twitterUser->name) ? $twitterUser->name : $twitterUser->screen_name;
+
+            // 既存のユーザーを確認
+            $user = User::find()->where(['mail' => $email])->one();
+            if ($user === null) {
+                // ユーザーが存在しない場合、新規ユーザーを作成
+                $user = new User();
+                $user->mail = $email;
+                $user->username = $name;
+                $user->password = Yii::$app->security->generateRandomString();
+                $user->auth_key = Yii::$app->security->generateRandomString();
+                if (!$user->save()) {
+                    // 保存に失敗した場合のエラーハンドリング
+                    Yii::$app->session->setFlash('error', 'Failed to save user information.');
+                    return $this->goHome();
+                }
+            }
+
+            // ユーザーをログイン
+            Yii::$app->user->login($user, 3600 * 24 * 30);
+
+            return $this->goHome();
+        } catch (\Exception $e) {
+            Yii::error('Twitter login error: ' . $e->getMessage(), 'twitter');
+            Yii::$app->session->setFlash('error', 'Twitter login failed. Please try again.');
+            return $this->goHome();
+        }
+    }
+
+
+
+
+
+
+
 }

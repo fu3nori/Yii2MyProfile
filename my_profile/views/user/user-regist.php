@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
-use yii\authclient\widgets\AuthChoice;
+use yii\helpers\Url;
 
 $this->title = 'ユーザー登録';
 $this->params['breadcrumbs'][] = $this->title;
@@ -24,38 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <?php ActiveForm::end(); ?>
-        Googleアカウントでアカウント作成<br>
-        <?php
-        $authAuthChoice = AuthChoice::begin([
-            'baseAuthUrl' => ['user/auth'],
-        ]);
-        foreach ($authAuthChoice->getClients() as $client) {
-            $authLink = $authAuthChoice->createClientUrl($client);
-            echo Html::a(
-                Html::img('@web/icons/sign_up_google.png', [
-                    'alt' => 'Sign up with Google',
-                    'class' => 'auth-client-img'
-                ]),
-                $authLink,
-                ['class' => 'auth-client-link']
-            );
-        }
-        AuthChoice::end();
-        ?>
+        <br>
+        <a href="<?= Url::to(['user/twitter']) ?>" class="btn btn-info">Twitterでアカウント作成</a>
         <br>
     </div>
 </div>
-
-<style>
-    .auth-client-img {
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        max-height: 100%;
-    }
-
-    .auth-client-link {
-        display: inline-block;
-        border: none;
-    }
-</style>
