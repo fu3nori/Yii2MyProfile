@@ -27,5 +27,24 @@ $this->params['breadcrumbs'][] = $this->title;
         <br>
         <a href="<?= Url::to(['user/twitter']) ?>" class="btn btn-info">Twitterでアカウント作成</a>
         <br>
+        Googleアカウントでアカウント作成<br>
+        <?php
+        $authAuthChoice = AuthChoice::begin([
+            'baseAuthUrl' => ['user/auth'],
+        ]);
+        foreach ($authAuthChoice->getClients() as $client) {
+            $authLink = $authAuthChoice->createClientUrl($client);
+            echo Html::a(
+                Html::img('@web/icons/sign_up_google.png', [
+                    'alt' => 'Sign up with Google',
+                    'class' => 'auth-client-img'
+                ]),
+                $authLink,
+                ['class' => 'auth-client-link']
+            );
+        }
+        AuthChoice::end();
+        ?>
+        <br>
     </div>
 </div>

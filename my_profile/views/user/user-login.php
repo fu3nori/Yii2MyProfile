@@ -24,7 +24,24 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+    Googleアカウントでサインイン<br>
+    <?php
+    $authAuthChoice = AuthChoice::begin([
+        'baseAuthUrl' => ['user/auth'],
+    ]);
+    foreach ($authAuthChoice->getClients() as $client) {
+        $authLink = $authAuthChoice->createClientUrl($client);
+        echo Html::a(
+            Html::img('@web/icons/sign_in_google.png', [
+                'alt' => 'Sign in with Google',
+                'class' => 'auth-client-img'
+            ]),
+            $authLink,
+            ['class' => 'auth-client-link']
+        );
+    }
+    AuthChoice::end();
+    ?>
     <br>
     <a href="<?= Url::to(['user/twitter']) ?>" class="btn btn-info">Twitterでログイン</a>
     <br>
