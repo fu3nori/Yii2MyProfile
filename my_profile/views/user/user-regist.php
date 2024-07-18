@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
-use yii\helpers\Url;
+use yii\authclient\widgets\AuthChoice;
 
 $this->title = 'ユーザー登録';
 $this->params['breadcrumbs'][] = $this->title;
@@ -24,9 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <?php ActiveForm::end(); ?>
-        <br>
-        <a href="<?= Url::to(['user/twitter']) ?>" class="btn btn-info">Twitterでアカウント作成</a>
-        <br>
         Googleアカウントでアカウント作成<br>
         <?php
         $authAuthChoice = AuthChoice::begin([
@@ -48,3 +45,17 @@ $this->params['breadcrumbs'][] = $this->title;
         <br>
     </div>
 </div>
+
+<style>
+    .auth-client-img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .auth-client-link {
+        display: inline-block;
+        border: none;
+    }
+</style>

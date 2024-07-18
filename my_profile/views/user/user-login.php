@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
-use yii\helpers\Url;
+use yii\authclient\widgets\AuthChoice;
 
 $this->title = 'ログイン';
 $this->params['breadcrumbs'][] = $this->title;
@@ -24,6 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <?php ActiveForm::end(); ?>
+
+
     Googleアカウントでサインイン<br>
     <?php
     $authAuthChoice = AuthChoice::begin([
@@ -43,7 +45,19 @@ $this->params['breadcrumbs'][] = $this->title;
     AuthChoice::end();
     ?>
     <br>
-    <a href="<?= Url::to(['user/twitter']) ?>" class="btn btn-info">Twitterでログイン</a>
-    <br>
     <p><a href="../user/forget">パスワードを忘れた方はこちら</a></p>
 </div>
+
+<style>
+    .auth-client-img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .auth-client-link {
+        display: inline-block;
+        border: none;
+    }
+</style>
