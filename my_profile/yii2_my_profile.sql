@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2024 at 01:35 PM
+-- Generation Time: Jul 05, 2024 at 11:39 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -50,8 +50,30 @@ CREATE TABLE `profile` (
   `service9` varchar(250) DEFAULT NULL COMMENT 'サービス名9',
   `service9_url` varchar(250) DEFAULT NULL COMMENT 'サービスURL9',
   `service10` varchar(250) DEFAULT NULL COMMENT 'サービス名10',
-  `service10_url` varchar(250) DEFAULT NULL COMMENT 'サービスURL10'
+  `service10_url` varchar(250) DEFAULT NULL COMMENT 'サービスURL10',
+  `img_url1` text DEFAULT NULL,
+  `thum_url1` text DEFAULT NULL,
+  `img_url2` text DEFAULT NULL,
+  `thum_url2` text DEFAULT NULL,
+  `img_url3` text DEFAULT NULL,
+  `thum_url3` text DEFAULT NULL,
+  `img_url4` text DEFAULT NULL,
+  `thum_url4` text DEFAULT NULL,
+  `img_url5` text DEFAULT NULL,
+  `thum_url5` text DEFAULT NULL,
+  `movie_url1` text DEFAULT NULL,
+  `movie_thum_url1` text DEFAULT NULL,
+  `movie_url2` text DEFAULT NULL,
+  `movie_thum_url2` text DEFAULT NULL,
+  `movie_url3` text DEFAULT NULL,
+  `movie_thum_url3` text DEFAULT NULL,
+  `movie_url4` text DEFAULT NULL,
+  `movie_thum_url4` text DEFAULT NULL,
+  `movie_url5` text DEFAULT NULL,
+  `movie_thum_url5` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='プロフィール登録テーブル';
+
+
 
 -- --------------------------------------------------------
 
@@ -66,9 +88,17 @@ CREATE TABLE `user` (
   `username` varchar(250) NOT NULL COMMENT 'ユーザー名',
   `password` varchar(255) NOT NULL COMMENT 'パスワード',
   `auth_key` varchar(32) NOT NULL,
-  `ip` varchar(255) NOT NULL COMMENT 'IPアドレス',
-  `created` datetime NOT NULL DEFAULT current_timestamp() COMMENT '登録日'
+  `ip` varchar(255) DEFAULT NULL COMMENT 'IPアドレス',
+  `created` datetime NOT NULL DEFAULT current_timestamp() COMMENT '登録日',
+  `token` text DEFAULT NULL,
+  `transaction_id` varchar(255) DEFAULT NULL,
+  `payment_status` varchar(255) DEFAULT NULL,
+  `google_id` varchar(255) DEFAULT NULL,
+  `google_token` text DEFAULT NULL,
+  `auth_provider` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='ユーザー情報テーブル';
+
+
 
 --
 -- Indexes for dumped tables
@@ -96,13 +126,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '連番';
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '連番', AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ユーザーID';
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ユーザーID', AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

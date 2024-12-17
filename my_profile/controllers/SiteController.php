@@ -9,7 +9,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-
+use yii\authclient\AuthAction;
+use app\models\User;
 class SiteController extends Controller
 {
     /**
@@ -51,6 +52,10 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'auth' => [
+                'class' => AuthAction::class,
+                'successCallback' => [$this, 'onAuthSuccess'],
+            ],
         ];
     }
 
@@ -61,7 +66,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
         return $this->render('index');
+    }
+
+    public function webhook()
+    {
+
+        return $this->render('site-webhook');
     }
 
     /**
@@ -124,5 +136,29 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    /**
+     * google login
+     */
+    public function onAuthSuccess($client)
+    {
+        $attributes = $client->getUserAttributes();
+
+        $googleId = $attributes['id'];
+        $email = $attributes['email'];
+        $name = $attributes['name'];
+
+        $user = User::find()->where(['google_id' => $googleId])->one();
+        if (!$user) {
+            // ユーザーが存在しない場合、新しいユーザーを作成
+            $user = new User();
+            $user->google_id = $googleId;
+            $user->mail = $email;
+            $user->username = $name;
+            $user->auth_provider = 'google';
+            $user->save(false);  // 必要に応じて検証を追加
+        }
+
+        Yii::$app->user->login($user);
     }
 }
