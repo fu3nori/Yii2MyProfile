@@ -12,6 +12,19 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'clients' => [
+                'google' => [
+                    'class' => 'yii\authclient\clients\Google',
+                    'clientId' => 'あなたの発行したgoogle認証情報のclientId',
+                    'clientSecret' => 'あなたの発行したgoogle認証情報のclientSecret',
+                    'returnUrl' => 'https://アプリを設置したサーバーのドメイン:443/web/user/auth',
+                    'scope' => 'email profile',
+                ],
+            ],
+        ],
+    
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'JgBSUj9ijTEfivdzoFUrMiSgXMQvwVh1',
