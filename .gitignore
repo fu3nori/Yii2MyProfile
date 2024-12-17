@@ -4,3 +4,8 @@ my_profile/web/image/
 ./my_profile/config/db.php
 
 .idea/inspectionProfiles/Project_Default.xml
+.idea/2ndapp.iml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/php.xml
+my_profile/config/db.php~
