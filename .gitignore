@@ -1,7 +1,7 @@
 my_profile/web/image/
 # setting
-./my_profile/config/web.php
-./my_profile/config/db.php
+#./my_profile/config/web.php
+#./my_profile/config/db.php
 
 .idea/inspectionProfiles/Project_Default.xml
 .idea/2ndapp.iml
