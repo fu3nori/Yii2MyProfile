@@ -4,6 +4,10 @@
 # netbeans project files
 nbproject
 
+# setting
+db.php
+web.php
+
 # zend studio for eclipse project files
 .buildpath
 .project

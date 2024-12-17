@@ -1,1 +1,4 @@
 my_profile/web/image/
+# setting
+db.php
+web.php
