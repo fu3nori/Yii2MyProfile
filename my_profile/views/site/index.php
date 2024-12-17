@@ -85,35 +85,8 @@ if (isset($_GET['paymentId']) && isset($_GET['PayerID'])) {
         <?php endif; ?>
         <div style="clear: both;"></div>
 
-        <br><br><br><br>
-        <?php if ($userId && Yii::$app->user->identity->role != 1 && Yii::$app->user->identity->role != 3): ?>
-            <div id="paypal">
-                <p>Donationして永久有効の画像ポートフォリオのアップロード権を手に入れませんか？(最大5枚)</p>
-                <div id="paypal-button-container"></div>
-                <?php $userId = Yii::$app->user->id; ?>
-                <script>
-                    paypal.Buttons({
-                        createOrder: function(data, actions) {
-                            return actions.order.create({
-                                purchase_units: [{
-                                    amount: {
-                                        value: '1500', // 支払い金額（日本円）
-                                        currency_code: 'JPY' // 通貨コードをJPYに設定
-                                    },
-                                    custom_id: '<?php echo $userId; ?>' // ユーザーIDを取得
-                                }]
-                            });
-                        },
-                        onApprove: function(data, actions) {
-                            return actions.order.capture().then(function(details) {
-                                // 支払い完了後の処理
-                                window.location.href = "https://my-profile.biz/web/site/index/?paymentId=" + data.orderID + "&PayerID=" + data.payerID;
-                            });
-                        }
-                    }).render('#paypal-button-container');
-                </script>
-            </div>
-        <?php endif; ?>
+
+
     </div>
 </div>
 

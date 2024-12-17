@@ -28,23 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, "service{$i}_url")->textInput(['maxlength' => true]) ?>
     <?php endfor; ?>
 
-    <?php for ($i = 1; $i <= 5; $i++): ?>
-        <?php if ($profile["img_url{$i}"]): ?>
-            <div class="form-group">
-                <label class="control-label">既存の画像 <?= $i ?></label>
-                <img src="<?= $profile["img_url{$i}"] ?>" alt="Image <?= $i ?>" style="max-width: 300px;">
-                <?= Html::a('削除', ['profile/delete-image', 'id' => $profile->user_id, 'imgNumber' => $i], [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => '本当にこの画像を削除しますか？',
-                        'method' => 'post',
-                    ],
-                ]) ?>
-            </div>
-        <?php else: ?>
-            <?= $form->field($model, "img_url{$i}")->fileInput() ?>
-        <?php endif; ?>
-    <?php endfor; ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>

@@ -18,7 +18,7 @@ class Profile extends ActiveRecord
             [['user_id'], 'required'],
             [['user_id'], 'integer'],
             [['self_introduction'], 'string'],
-            [['service1', 'service2', 'service3', 'service4', 'service5', 'service6', 'service7', 'service8', 'service9', 'service10','img_url1', 'img_url2', 'img_url3', 'img_url4', 'img_url5', 'thum_url1', 'thum_url2', 'thum_url3', 'thum_url4', 'thum_url5'], 'string', 'max' => 255],
+            [['service1', 'service2', 'service3', 'service4', 'service5', 'service6', 'service7', 'service8', 'service9', 'service10',], 'string', 'max' => 255],
             [['service1_url', 'service2_url', 'service3_url', 'service4_url', 'service5_url', 'service6_url', 'service7_url', 'service8_url', 'service9_url', 'service10_url'], 'string', 'max' => 255],
             ['service1', 'validateServicePair', 'skipOnEmpty' => false],
         ];

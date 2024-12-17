@@ -53,16 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'service10')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'service10_url')->textInput(['maxlength' => true]) ?>
-        <!-- ファイルアップロード -->
 
-        <?php if (Yii::$app->user->identity->role == 3): ?>
-
-            <?= $form->field($model, 'img_url1')->fileInput() ?>
-            <?= $form->field($model, 'img_url2')->fileInput() ?>
-            <?= $form->field($model, 'img_url3')->fileInput() ?>
-            <?= $form->field($model, 'img_url4')->fileInput() ?>
-            <?= $form->field($model, 'img_url5')->fileInput() ?>
-        <?php endif; ?>
 
         <!-- ここまで-->
         <div class="form-group">

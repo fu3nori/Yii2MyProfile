@@ -45,6 +45,8 @@ class UserController extends Controller
                 $user->username = $name;
                 $user->password = Yii::$app->security->generateRandomString();
                 $user->auth_key = Yii::$app->security->generateRandomString();
+                $user->role = User::find()->count() === 0 ? 1 : 0; // 最初のユーザーのみ role を 1 にする
+
                 if (!$user->save()) {
                     // 保存に失敗した場合のエラーハンドリング
                     Yii::$app->session->setFlash('error', 'Failed to save user information.');
@@ -75,6 +77,7 @@ class UserController extends Controller
             $user = new User();
             $user->username = $name;
             $user->email = $email;
+            $user->role = User::find()->count() === 0 ? 1 : 0; // 最初のユーザーのみ role を 1 にする
             // パスワードは不要、代わりにauth_keyを使用
             $user->auth_key = Yii::$app->security->generateRandomString();
             $user->save(false);
@@ -114,6 +117,7 @@ class UserController extends Controller
         $model = new User();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->setPassword($model->password);
+
             $model->role = User::find()->count() === 0 ? 1 : 0; // 最初のユーザーのみ role を 1 にする
             $model->save(false);
             Yii::$app->user->login($model);

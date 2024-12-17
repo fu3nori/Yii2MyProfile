@@ -64,27 +64,7 @@ $domain = Yii::$app->request->hostInfo; // ドメイン名を取得
         </div>
     </div>
 
-    <?php if ($profile->thum_url1 || $profile->thum_url2 || $profile->thum_url3 || $profile->thum_url4 || $profile->thum_url5): ?>
-        <div class="row mt-3">
-            <div class="col-12">
-                <h2 class="display-6">Image</h2>
-                <div class="heading-underline mb-3"></div>
-            </div>
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-                <?php
-                $thumbnail = $profile->{"thum_url{$i}"};
-                $original = $profile->{"img_url{$i}"};
-                ?>
-                <?php if ($thumbnail && $original): ?>
-                    <div class="col-6 col-md-4 col-lg-3 mt-2">
-                        <a href="<?= $domain . $original ?>" target="_blank">
-                            <img src="<?= $domain . $thumbnail ?>" alt="Thumbnail <?= $i ?>" class="img-fluid">
-                        </a>
-                    </div>
-                <?php endif; ?>
-            <?php endfor; ?>
-        </div>
-    <?php endif; ?>
+
 
     <div class="row mt-3">
         <div class="col-12">
