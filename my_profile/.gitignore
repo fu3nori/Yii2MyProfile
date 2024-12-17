@@ -8,6 +8,8 @@ nbproject
 db.php
 web.php
 
+./config/*
+
 # zend studio for eclipse project files
 .buildpath
 .project
