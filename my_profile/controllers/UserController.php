@@ -114,7 +114,9 @@ class UserController extends Controller
 
     public function actionRegist()
     {
+
         $model = new User();
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->setPassword($model->password);
 

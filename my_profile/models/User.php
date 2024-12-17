@@ -7,6 +7,16 @@ use yii\web\IdentityInterface;
 
 class User extends ActiveRecord implements IdentityInterface
 {
+    public $id;
+    public $mail;
+    public $role;
+    public $ip;
+    public $created;
+    public $username;
+    public $auth_key;
+    public $token;
+    public $password;
+    public $user_language;
     public static function tableName()
     {
         return 'user';
@@ -17,6 +27,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['mail', 'username'], 'required'],
             [['mail'], 'email'],
+
             [['mail', 'username', 'password', 'auth_key', 'token', ], 'string', 'max' => 255],
             [['mail'], 'unique'],
             [['password'], 'string', 'min' => 6],
