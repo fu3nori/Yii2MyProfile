@@ -9,3 +9,4 @@ my_profile/web/image/
 .idea/workspace.xml
 .idea/php.xml
 my_profile/config/db.php~
+my_profile/config/web.php~

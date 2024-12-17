@@ -77,16 +77,12 @@ class ProfileController extends Controller
         $model = new ProfileForm();
         $model->attributes = $profile->attributes;
 
-        // 既存のサムネイル URL をモデルに代入
-        for ($i = 1; $i <= 5; $i++) {
-            $thumbnailAttribute = "thum_url{$i}";
-            $model->$thumbnailAttribute = $profile->$thumbnailAttribute;
-        }
+
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             // $profileモデルの属性を更新
             $profile->attributes = $model->attributes;
-            $this->handleFileUploadForEdit($model, $profile);
+
 
             if ($profile->save(false)) {
                 return $this->redirect(['profile/view', 'id' => $userId]);
@@ -96,25 +92,7 @@ class ProfileController extends Controller
         return $this->render('profile-edit', ['model' => $model, 'profile' => $profile]);
     }
 
-    protected function handleFileUploadForEdit($model, $profile)
-    {
-        for ($i = 1; $i <= 5; $i++) {
-            $imgAttribute = "img_url{$i}";
-            $thumbnailAttribute = "thum_url{$i}";
-            $uploadedFile = UploadedFile::getInstance($model, $imgAttribute);
 
-            if ($uploadedFile) {
-                // 古い画像の削除
-                $this->deleteOldImage($profile->$imgAttribute);
-                $this->deleteOldImage($profile->$thumbnailAttribute);
-
-                // 新しい画像の保存
-                $imgPath = $this->saveImage($uploadedFile);
-                $profile->$imgAttribute = $imgPath['full'];
-                $profile->$thumbnailAttribute = $imgPath['thumbnail'];
-            }
-        }
-    }
 
     protected function handleFileUpload($model, $profile)
     {

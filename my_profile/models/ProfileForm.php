@@ -29,20 +29,7 @@ class ProfileForm extends Model
     public $service10;
     public $service10_url;
 
-    /**
-     * 画像
-     */
-    public $tempName;
-    public $img_url1;
-    public $img_url2;
-    public $img_url3;
-    public $img_url4;
-    public $img_url5;
-    public $thum_url1;
-    public $thum_url2;
-    public $thum_url3;
-    public $thum_url4;
-    public $thum_url5;
+
     public function rules()
     {
         return [
@@ -50,8 +37,7 @@ class ProfileForm extends Model
             [['service1', 'service2', 'service3', 'service4', 'service5', 'service6', 'service7', 'service8', 'service9', 'service10'], 'string', 'max' => 255],
             [['service1_url', 'service2_url', 'service3_url', 'service4_url', 'service5_url', 'service6_url', 'service7_url', 'service8_url', 'service9_url', 'service10_url'], 'string', 'max' => 255],
             ['service1', 'validateServicePair', 'skipOnEmpty' => false],
-            [['img_url1', 'img_url2', 'img_url3', 'img_url4', 'img_url5'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, gif'],
-            [['thum_url1', 'thum_url2', 'thum_url3', 'thum_url4', 'thum_url5'], 'safe'],
+
         ];
     }
 
