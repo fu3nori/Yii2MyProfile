@@ -19,7 +19,7 @@ $config = [
                     'class' => 'yii\authclient\clients\Google',
                     'clientId' => 'YOUR CLIENT ID',
                     'clientSecret' => 'YOUR CLIENT SECRET',
-                    'returnUrl' => 'http://localhost:80/2ndapp/my_profile/web/user/auth',
+                    'returnUrl' => 'http://YOUR_DOMAIN:443/web/user/auth',
                     'scope' => 'email profile',
                 ],
             ],
