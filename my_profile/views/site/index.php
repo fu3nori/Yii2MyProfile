@@ -13,31 +13,7 @@ $userId = Yii::$app->user->id;
 $profileExists = !Yii::$app->user->isGuest && Profile::find()->where(['user_id' => $userId])->exists();
 ?>
 
-<?php
-// PayPalのリダイレクトから戻った場合の処理
-if (isset($_GET['paymentId']) && isset($_GET['PayerID'])) {
-    // ユーザーIDを取得
-    $userId = Yii::$app->user->id;
-    $user_id = $userId;
-
-    // データベースを更新
-    // config/db.phpから設定を取得
-    $db = Yii::$app->db;
-    $dsn = $db->dsn;
-    $username = $db->username;
-    $password = $db->password;
-
-    try {
-        $dbh = new PDO($dsn, $username, $password);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $dbh->prepare("UPDATE user SET role = '3' WHERE id = :user_id");
-        $stmt->bindParam(':user_id', $user_id);
-        $stmt->execute();
-    } catch (PDOException $e) {
-        echo 'Connection failed: ' . $e->getMessage();
-    }
-}
-?>
+<!-- PayPal payment processing is now handled in SiteController -->
 
 <div class="site-index">
 <?php

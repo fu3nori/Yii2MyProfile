@@ -24,8 +24,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <html lang="<?= Yii::$app->language ?>" class="h-100">
 <head>
     <title><?= Html::encode($this->title) ?></title>
-    <!-- https://www.paypal.com/sdk/js?client-id=Client ID&currency=JPY と記述 -->
-    <script src="https://www.paypal.com/sdk/js?client-id=あなたの発行したpaypalのclient-id&currency=JPY"></script>
+    <!-- PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=<?= Yii::$app->paypal->clientId ?>&currency=JPY"></script>
     <?php $this->head() ?>
 </head>
 <body class="d-flex flex-column h-100">

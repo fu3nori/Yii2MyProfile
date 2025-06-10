@@ -63,6 +63,13 @@ $config = [
             ],
         ],
 
+        'paypal' => [
+            'class' => 'app\components\PaypalComponent',
+            'clientId' => 'YOUR_PAYPAL_CLIENT_ID',
+            'clientSecret' => 'YOUR_PAYPAL_CLIENT_SECRET',
+            'sandbox' => true, // Set to false for production environment
+        ],
+
     ],
     'params' => $params,
 ];
