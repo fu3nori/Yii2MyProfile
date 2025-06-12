@@ -25,13 +25,6 @@ if (!$userId) {
         <div class="heading-underline mb-4 mx-auto"></div>
         <p class="lead">アカウントをお持ちの方はログインを、お持ちでない方はアカウントを取得して下さい<br>If you have an account, please log in, if not, please get an account.</p>
     </div>';
-}elseif ("0" === Yii::$app->user->user_language) {
-    echo '    <div class="jumbotron text-center bg-transparent mt-5 mb-5">
-        <h1 class="display-4">ダッシュボード｜Dashboard</h1>
-        <div class="heading-underline mb-4 mx-auto"></div>
-        <p class="lead">あなたの使用する言語を【アカウント確認・編集】で設定して下さい｜Please set your preferred language in [Check/Edit Account].</p>
-    </div>
-';
 }else {
     echo '    <div class="jumbotron text-center bg-transparent mt-5 mb-5">
         <h1 class="display-4">ダッシュボード｜Dashboard</h1>
