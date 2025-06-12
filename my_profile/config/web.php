@@ -5,6 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name' => 'MyProfile',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -20,7 +21,8 @@ $config = [
                     'clientId' => 'YOUR CLIENT ID',
                     'clientSecret' => 'YOUR CLIENT SECRET',
                     'returnUrl' => 'http://YOUR_DOMAIN:443/web/user/auth',
-                    'scope' => 'email profile',
+                    'scope' => 'openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+
                 ],
             ],
         ],
